@@ -27,6 +27,30 @@ $background-opacity: 0.9;
     }
   }
 }
+//Media Query Mixin
+@mixin MediaSm {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+
+@mixin MediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin MediaLg {
+  @media screen and (min-width: 769px) and (max-width: 1170px) {
+    @content;
+  }
+}
+
+@mixin MediaXL {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}
 
 //menu button
 
@@ -60,5 +84,98 @@ $background-opacity: 0.9;
         transform: rotate(-45deg) translate(7px, -6px);
       }
     }
+  }
+}
+
+//Menu Overlay
+
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  opacity: 0.9;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+  &-branding,
+  &-nav {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  &-nav {
+    margin: 0;
+    padding: 0;
+    background: darken($primary-color, 5);
+    list-style: none;
+    transform: translate3d(0, -100%, 0);
+
+    @include easeOut;
+
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  //Branding side
+
+  &-branding {
+    background: $primary-color;
+    @include easeOut;
+    transform: translate3d(0, 100%, 0);
+
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+    .portrait {
+      width: 250px;
+      height: 250px;
+      background: url("../img/photo3.jpg");
+      border-radius: 50%;
+      border: solid 3px $secondary-color;
+    }
+  }
+
+  .nav-item {
+    transform: translate3d(600px, 0, 0);
+    @include easeOut;
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+
+    &.current > a {
+      color: $secondary-color;
+    }
+  }
+
+  .nav-link {
+    display: inline-block;
+    position: relative;
+    font-size: 30px;
+    text-transform: uppercase;
+    padding: 1rem, 0;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    @include easeOut;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}
+
+//Delay each nav-item slide
+
+@for $x from 1 through 4 {
+  .nav-item:nth-child(#{$x}) {
+    transition-delay: $x * 0.1s;
   }
 }
