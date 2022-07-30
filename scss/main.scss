@@ -67,6 +67,12 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
 }
+body#bg-img {
+  background: url(../img/background.jpg);
+  background: rgba(68, 68, 68, 0.9), url(../img/background.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+}
 //Headings
 
 h1,
@@ -110,9 +116,9 @@ main {
   }
   &#home {
     overflow: hidden;
-    h1 {
-      margin-top: 20vh;
-    }
+  }
+  h1 {
+    margin-top: 20vh;
   }
 }
 
